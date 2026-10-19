@@ -29,17 +29,14 @@ app.post('/todo', (req, res) => {
 });
 
 app.put('/todo/:id', (req, res) => {
-  const id = Number(req.params.id);
+  const id = req.params.id;
   const text = (req.body.text || '').trim();
-  const todo = todos.find((t) => t.id === id);
-  if (todo && text) todo.text = text;
-  res.redirect('/');
+  res.send(`PUT /todo/:${id}, 내용 : ${text} 요청 처리`);
 });
 
 app.delete('/todo/:id', (req, res) => {
-  const id = Number(req.params.id);
-  todos = todos.filter((t) => t.id !== id);
-  res.redirect('/');
+  const id = req.params.id;
+  res.send(`DELETE /todo/:${id} 요청 처리`);
 });
 
 app.listen(PORT, () => {
